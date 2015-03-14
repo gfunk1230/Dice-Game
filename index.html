@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dice Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <style>
+      .dice,.roll {
+        margin-top: 25px;
+      }
+      .dice-one,.dice-two {
+        display: inline-block;
+        border: solid 1px #000;
+        line-height: 100px;
+        height: 100px;
+        margin-left: 10px;
+        width: 100px;
+      }
+      .list-inline li{
+        border: solid 1px #000;
+        height: 200px;
+        line-height: 200px;
+        margin-left: 10px;
+        width: 100px;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition: 0.5s
+      }
+      
+      .selected {
+        opacity: .2;
+        -webkit-transform: rotatey(180deg);
+      }
+    </style>
+    
+    <script>
+
+    $( document ).ready(function() {
+      
+      var diceOne, diceTwo, sum,
+      cardsSelected = [],
+      $cards = $('.list-inline li'),
+      $diceOne = $('.dice-one'),
+      $diceTwo = $('.dice-two'),
+      $alertMsg = $('.alert-msg');
+      
+      
+      $('.roll-button').on('click', function() {
+        cardsSelected = [];
+        diceOne = Math.floor(Math.random()*6 + 1),
+        diceTwo = Math.floor(Math.random()*6 + 1);
+        sum = diceOne + diceTwo;
+
+        $diceOne.text(diceOne);
+        $diceTwo.text(diceTwo);
+        $alertMsg.text('');
+        $('.cards').addClass('rolled');
+      })
+
+      $cards.on('click', function() {
+        if($('.cards').hasClass('rolled')) {
+          var $this = $(this),
+          cardVal = $this.text(),
+          idx = $.inArray(cardVal, cardsSelected);
+          
+          if (idx == -1) {
+            cardsSelected.push(cardVal);
+          } else {
+            cardsSelected.splice(idx, 1);
+          }
+    
+          $this.toggleClass('selected');
+          
+          var cardsSelectedSum = eval(cardsSelected.join('+'));
+          if(sum !== cardsSelectedSum) {
+            $alertMsg.text('Sorry not a match! Try Combining with a another card');
+          } else {
+            $alertMsg.text('Excellent! Roll Again');
+          }
+
+          if($('.list-inline li.selected').length == $('.list-inline li').length && sum == cardsSelectedSum) {
+            $alertMsg.text('You Shut the Box! Congrats');
+          }
+
+        } else {
+          $alertMsg.text('You didnt roll the dice');
+        }
+
+      })
+
+      $('.end-turn').on('click', function() {
+        cardsSelected = [];
+        $cards.removeClass('selected');
+        $diceOne.text('Dice');
+        $diceTwo.text('Dice');
+        $alertMsg.text('');
+      })
+      
+      $('.end-game').on('click', function() {
+        cardsSelected = [];
+        $diceOne.text('Dice');
+        $diceTwo.text('Dice');
+        $cards.removeClass('selected');
+        $alertMsg.text('');
+      })
+      
+    });
+
+    </script>
+</head>
+
+<body>
+  <div class="container text-center">
+    <div class="row cards">
+      <div class="col-md-12">
+        <h1>Shut the Door</h1>
+        <ul class="list-inline">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="alert-msg"></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary end-turn">End Turn 1</button>
+        <button type="button" class="btn btn-primary end-game">End Game</button>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center dice">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="dice-one">Dice</div>
+        <div class="dice-two">Dice</div>
+      </div>
+    </div>
+    <div class="row roll">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary roll-button">Roll</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
