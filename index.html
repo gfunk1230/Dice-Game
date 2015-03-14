@@ -96,6 +96,10 @@
           if($('.list-inline li.selected').length == $('.list-inline li').length && sum == cardsSelectedSum) {
             $alertMsg.text('You Shut the Box! Congrats');
           }
+          
+          if($('.list-inline li.selected').length == $('.list-inline li').length && sum !== cardsSelectedSum) {
+            $alertMsg.text('Sorry You Lose');
+          }
 
         } else {
           $alertMsg.text('You didnt roll the dice');
