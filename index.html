@@ -41,6 +41,10 @@
         opacity: .2;
         -webkit-transform: rotatey(180deg);
       }
+
+      .btn {
+        font-size: 24px;
+      }
     </style>
 
     <script>
@@ -110,7 +114,7 @@
       }
 
       $('.end-turn').on('click', function() {
-        $diceOne.text('Dice');
+        $diceOne.text('Roll');
         $diceTwo.text('Dice');
         $alertMsg.text('');
 
@@ -122,7 +126,7 @@
 
       $('.end-game').on('click', function() {
         cardsSelected = [];
-        $diceOne.text('Dice');
+        $diceOne.text('Roll');
         $diceTwo.text('Dice');
         $cards.removeClass('selected');
         $alertMsg.text('');
@@ -166,7 +170,7 @@
   <div class="container text-center dice">
     <div class="row">
       <div class="col-md-12">
-        <div class="dice-one">Dice</div>
+        <div class="dice-one">Roll</div>
         <div class="dice-two">Dice</div>
       </div>
     </div>
