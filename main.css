@@ -1,0 +1,38 @@
+body {
+  font-family: 'Francois One', sans-serif;
+}
+
+h1{
+  font-size: 60px;
+}
+.dice,.roll {
+  margin-top: 25px;
+}
+.dice-one,.dice-two {
+  display: inline-block;
+  font-size: 30px;
+  border: solid 1px #000;
+  line-height: 100px;
+  height: 100px;
+  margin-left: 10px;
+  width: 100px;
+}
+.list-inline li{
+  font-size: 46px;
+  border: solid 1px #000;
+  height: 200px;
+  line-height: 200px;
+  margin-left: 10px;
+  width: 100px;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s
+}
+
+.selected {
+  opacity: .2;
+  -webkit-transform: rotatey(180deg);
+}
+
+.btn {
+  font-size: 24px;
+}
